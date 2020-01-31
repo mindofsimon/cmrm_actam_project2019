@@ -183,4 +183,5 @@ resume_button.onclick=fadeout;
 //144-->key pressed
 //128-->key released
 //keys from 48 to 72 (default octave)
-//COMMENT
+//COMMENT1
+//COMMENT2
