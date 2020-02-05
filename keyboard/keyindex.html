@@ -3,12 +3,51 @@
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.4.84/Tone.js"></script>
         <link rel="stylesheet" type="text/css" href="keymain.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
     <body>
         <div id="app">
             <navbar id="navbar" :title="mainTitle"></navbar>
-            <app-view id="app-view">
+                <app-view id="app-view">
+                    <div id = "notes_table" class="display_none">
+                        <div class = "note_box" id = "C"> C </div>
+                        <div class = "note_box" id = "C#"> C# </div>
+                        <div class = "note_box" id = "D"> D </div>
+                        <div class = "note_box" id = "D#"> D# </div>
+                        <div class = "note_box" id = "E"> E </div>
+                        <div class = "note_box" id = "F"> F </div>
+                        <div class = "note_box" id = "F#"> F# </div>
+                        <div class = "note_box" id = "G"> G </div>
+                        <div class = "note_box" id = "G#"> G# </div>
+                        <div class = "note_box" id = "A"> A </div>
+                        <div class = "note_box" id = "A#"> A# </div>
+                        <div class = "note_box" id = "B"> B </div>
+                    </div>
+                    <div id = "intervals_table" class="display_none">
+                        <div class = "interval_box" id = "m2"> m2 </div>
+                        <div class = "interval_box" id = "M2"> M2 </div>
+                        <div class = "interval_box" id = "m3"> m3 </div>
+                        <div class = "interval_box" id = "M3"> M3 </div>
+                        <div class = "interval_box" id = "P4"> P4</div>
+                        <div class = "interval_box" id = "A4"> A4</div>
+                        <div class = "interval_box" id = "P5"> P5</div>
+                        <div class = "interval_box" id = "m6"> m6 </div>
+                        <div class = "interval_box" id = "M6"> M6 </div>
+                        <div class = "interval_box" id = "m7"> m7 </div>
+                        <div class = "interval_box" id = "M7"> M7 </div>
+                        <div class = "interval_box" id = "O"> O </div>
+                    </div>
+                    <div id = "chords_table" class="display_none">
+                        <div class = "chord_box" id = "maj"> maj </div>
+                        <div class = "chord_box" id = "min"> min </div>
+                        <div class = "chord_box" id = "maj7"> maj7 </div>
+                        <div class = "chord_box" id = "min7"> min7 </div>
+                        <div class = "chord_box" id = "aug"> aug </div>
+                        <div class = "chord_box" id = "dom7"> dim</div>
+                        <div class = "chord_box" id = "hdim7"> hdim7</div>
+                        <div class = "chord_box" id = "dim7"> dim7 </div>
+                    </div>
                     <div id="keyboard">
                         <div id="wkcontainer"></div>
                         <div id="bkcontainer1"></div>
@@ -16,8 +55,35 @@
                         <div id="bkcontainer3"></div>
                         <div id="bkcontainer4"></div>
                     </div>
+                    <button id="playbutton"><i class="fa fa-play"></i></button>
+                    <div id="settingsico">    
+                        <i name="settings" class="fa fa-gear"></i><label for="settings">SETTINGS</label>   
+                    </div> 
+                    <div id="settings">
+                        <label for="difficulty">Difficulty</label>
+                        <select name="difficulty" id="difficulty">
+                            <option value="low">low</option>
+                            <option value="medium">medium</option>
+                            <option value="hard">hard</option>
+                        </select>
+                        <br>
+                        <label for="octave">Octave</label><br>
+                        <select name="octave" id="octave">
+                            <option value="c0c2">C0-C2</option>
+                            <option value="c1c3">C1-C3</option>
+                            <option value="c2c4">C2-C4</option>
+                            <option value="c3c5" selected="selected">C3-C5</option>
+                            <option value="c4c6">C4-C6</option>
+                            <option value="c5c7">C5-C7</option>
+                            <option value="c6c8">C6-C8</option>
+                            <option value="c7c9">C7-C9</option>
+                        </select>
+                    </div>
+                    <div id="wrongans" class="answer"></div>
+                    <div id="goodans" class="answer"></div>
+                    <label id="score"></label>
                     <div id="resume">CLICK SOMEWHERE TO START SOUND</div>
-            </app-view>
+                </app-view>
         </div>
         <script src="keymain.js"></script>
     </body>
