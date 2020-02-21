@@ -1,0 +1,66 @@
+{
+  "name": "tonal",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "main": "packages/modules/dist/index.es5.js",
+  "module": "packages/modules/dist/index.esnext.js",
+  "scripts": {
+    "lerna": "lerna bootstrap",
+    "lerna:publish": "yarn build:prod && lerna publish",
+    "build": "lerna exec --parallel -- rollup -c=../../rollup.config.js",
+    "build:browser": "cd packages/modules && rollup -c=rollup.browser.config.js",
+    "build:clean": "lerna exec --parallel -- rimraf dist/",
+    "build:prod": "yarn build:clean && yarn lerna && yarn build && yarn build:browser",
+    "test": "jest --coverage",
+    "test:lint": "tslint --fix --project tsconfig.json -t codeFrame 'packages/**/*.ts'",
+    "test:ci": "yarn test:lint && yarn build && yarn test -- --no-cache"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "packages/**/*.ts": ["prettier --write", "tslint", "git add"]
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "ts-jest"
+    },
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": ["ts", "tsx", "js"],
+    "coveragePathIgnorePatterns": ["/node_modules/", "/test/", ".*\\.d\\.ts"],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    },
+    "collectCoverageFrom": ["**/*.ts"]
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@types/node": "^13.1.4",
+    "husky": "^3.1.0",
+    "jest": "^24.8.0",
+    "jest-config": "^24.8.0",
+    "lerna": "^3.19.0",
+    "lint-staged": "^9.5.0",
+    "lodash": "^4.17.15",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.0",
+    "rollup": "^1.27.9",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-filesize": "^6.2.1",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.1.2",
+    "rollup-plugin-typescript2": "^0.25.3",
+    "ts-jest": "^24.2.0",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.7.3"
+  }
+}

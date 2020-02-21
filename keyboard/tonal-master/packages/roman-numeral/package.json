@@ -1,0 +1,26 @@
+{
+  "name": "@tonaljs/roman-numeral",
+  "version": "3.3.0",
+  "description": "Parse and properties of roman numeral strings",
+  "keywords": [
+    "roman-numeral",
+    "music",
+    "analysis",
+    "theory",
+    "@tonaljs/tonal"
+  ],
+  "main": "dist/index.es5.js",
+  "module": "dist/index.esnext.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/roman-numeral/index.d.ts",
+  "dependencies": {
+    "@tonaljs/tonal": "^3.2.2"
+  },
+  "author": "danigb@gmail.com",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

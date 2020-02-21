@@ -1,0 +1,21 @@
+{
+  "name": "@tonaljs/tonal",
+  "version": "3.2.2",
+  "description": "Music theory library",
+  "keywords": [
+    "music",
+    "theory",
+    "@tonaljs/tonal"
+  ],
+  "main": "dist/index.es5.js",
+  "module": "dist/index.esnext.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/tonal/index.d.ts",
+  "author": "danigb@gmail.com",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

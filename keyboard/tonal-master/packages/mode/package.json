@@ -1,0 +1,26 @@
+{
+  "name": "@tonaljs/mode",
+  "version": "3.2.3",
+  "description": "Functions to work with musical modes",
+  "keywords": [
+    "mode",
+    "music",
+    "theory",
+    "@tonaljs/tonal"
+  ],
+  "main": "dist/index.es5.js",
+  "module": "dist/index.esnext.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/mode/index.d.ts",
+  "dependencies": {
+    "@tonaljs/pcset": "^3.2.3",
+    "@tonaljs/tonal": "^3.2.2"
+  },
+  "author": "danigb@gmail.com",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

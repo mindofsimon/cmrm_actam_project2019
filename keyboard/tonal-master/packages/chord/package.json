@@ -1,0 +1,30 @@
+{
+  "name": "@tonaljs/chord",
+  "version": "3.3.0",
+  "description": "Musical chords and its relations",
+  "keywords": [
+    "chord",
+    "chords",
+    "music",
+    "theory",
+    "@tonaljs"
+  ],
+  "main": "dist/index.es5.js",
+  "module": "dist/index.esnext.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/chord/index.d.ts",
+  "dependencies": {
+    "@tonaljs/array": "^3.2.3",
+    "@tonaljs/chord-dictionary": "^3.3.0",
+    "@tonaljs/pcset": "^3.2.3",
+    "@tonaljs/scale-dictionary": "^3.4.0",
+    "@tonaljs/tonal": "^3.2.2"
+  },
+  "author": "danigb@gmail.com",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

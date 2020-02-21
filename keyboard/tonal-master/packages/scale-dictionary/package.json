@@ -1,0 +1,27 @@
+{
+  "name": "@tonaljs/scale-dictionary",
+  "version": "3.4.0",
+  "description": "A dictionary of musical scales",
+  "keywords": [
+    "scale",
+    "dictionary",
+    "music",
+    "theory",
+    "@tonaljs/tonal"
+  ],
+  "main": "dist/index.es5.js",
+  "module": "dist/index.esnext.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/scale-dictionary/index.d.ts",
+  "dependencies": {
+    "@tonaljs/interval": "^3.2.3",
+    "@tonaljs/pcset": "^3.2.3"
+  },
+  "author": "danigb@gmail.com",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

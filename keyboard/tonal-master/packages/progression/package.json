@@ -1,0 +1,28 @@
+{
+  "name": "@tonaljs/progression",
+  "version": "3.2.6",
+  "description": "Build musical chord progressions",
+  "keywords": [
+    "chord",
+    "progression",
+    "music",
+    "theory",
+    "tonal"
+  ],
+  "main": "dist/index.es5.js",
+  "module": "dist/index.esnext.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/progression/index.d.ts",
+  "dependencies": {
+    "@tonaljs/chord": "^3.3.0",
+    "@tonaljs/roman-numeral": "^3.3.0",
+    "@tonaljs/tonal": "^3.2.2"
+  },
+  "author": "danigb@gmail.com",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

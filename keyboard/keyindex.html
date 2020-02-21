@@ -2,6 +2,10 @@
     <head>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.4.84/Tone.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-firestore.js"></script>
+        <script src="teoria-master/teoria.js"></script>
+        <script src="tonal-master/tonal.min.js"></script>
         <link rel="stylesheet" type="text/css" href="keymain.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
@@ -10,43 +14,54 @@
         <div id="app">
             <navbar id="navbar" :title="mainTitle"></navbar>
                 <app-view id="app-view">
-                    <div id = "notes_table" class="display_none">
-                        <div class = "note_box" id = "C"> C </div>
-                        <div class = "note_box" id = "C#"> C# </div>
-                        <div class = "note_box" id = "D"> D </div>
-                        <div class = "note_box" id = "D#"> D# </div>
-                        <div class = "note_box" id = "E"> E </div>
-                        <div class = "note_box" id = "F"> F </div>
-                        <div class = "note_box" id = "F#"> F# </div>
-                        <div class = "note_box" id = "G"> G </div>
-                        <div class = "note_box" id = "G#"> G# </div>
-                        <div class = "note_box" id = "A"> A </div>
-                        <div class = "note_box" id = "A#"> A# </div>
-                        <div class = "note_box" id = "B"> B </div>
+                    <div class="table display_none" id = "notes_table">
+                        <div class = "box" id = "n1"> C </div>
+                        <div class = "box" id = "n2"> C# </div>
+                        <div class = "box" id = "n3"> D </div>
+                        <div class = "box" id = "n4"> D# </div>
+                        <div class = "box" id = "n5"> E </div>
+                        <div class = "box" id = "n6"> F </div>
+                        <div class = "box" id = "n7"> F# </div>
+                        <div class = "box" id = "n8"> G </div>
+                        <div class = "box" id = "n9"> G# </div>
+                        <div class = "box" id = "n10"> A </div>
+                        <div class = "box" id = "n11"> A# </div>
+                        <div class = "box" id = "n12"> B </div>
+                        <div class = "box" id = "n13"> C </div>
+                        <div class = "box" id = "n14"> C# </div>
+                        <div class = "box" id = "n15"> D </div>
+                        <div class = "box" id = "n16"> D# </div>
+                        <div class = "box" id = "n17"> E </div>
+                        <div class = "box" id = "n18"> F </div>
+                        <div class = "box" id = "n19"> F# </div>
+                        <div class = "box" id = "n20"> G </div>
+                        <div class = "box" id = "n21"> G# </div>
+                        <div class = "box" id = "n22"> A </div>
+                        <div class = "box" id = "n23"> A# </div>
+                        <div class = "box" id = "n24"> B </div>
+                        <div class = "box" id = "n25"> C </div>
                     </div>
-                    <div id = "intervals_table" class="display_none">
-                        <div class = "interval_box" id = "m2"> m2 </div>
-                        <div class = "interval_box" id = "M2"> M2 </div>
-                        <div class = "interval_box" id = "m3"> m3 </div>
-                        <div class = "interval_box" id = "M3"> M3 </div>
-                        <div class = "interval_box" id = "P4"> P4</div>
-                        <div class = "interval_box" id = "A4"> A4</div>
-                        <div class = "interval_box" id = "P5"> P5</div>
-                        <div class = "interval_box" id = "m6"> m6 </div>
-                        <div class = "interval_box" id = "M6"> M6 </div>
-                        <div class = "interval_box" id = "m7"> m7 </div>
-                        <div class = "interval_box" id = "M7"> M7 </div>
-                        <div class = "interval_box" id = "O"> O </div>
+                    <div class="table display_none" id = "intervals_table">
+                        <div class = "box" id = "m2"> m2 </div>
+                        <div class = "box" id = "M2"> M2 </div>
+                        <div class = "box" id = "m3"> m3 </div>
+                        <div class = "box" id = "M3"> M3 </div>
+                        <div class = "box" id = "P4"> P4</div>
+                        <div class = "box" id = "A4"> A4</div>
+                        <div class = "box" id = "P5"> P5</div>
+                        <div class = "box" id = "m6"> m6 </div>
+                        <div class = "box" id = "M6"> M6 </div>
+                        <div class = "box" id = "m7"> m7 </div>
+                        <div class = "box" id = "M7"> M7 </div>
+                        <div class = "box" id = "O"> O </div>
                     </div>
-                    <div id = "chords_table" class="display_none">
-                        <div class = "chord_box" id = "maj"> maj </div>
-                        <div class = "chord_box" id = "min"> min </div>
-                        <div class = "chord_box" id = "maj7"> maj7 </div>
-                        <div class = "chord_box" id = "min7"> min7 </div>
-                        <div class = "chord_box" id = "aug"> aug </div>
-                        <div class = "chord_box" id = "dom7"> dim</div>
-                        <div class = "chord_box" id = "hdim7"> hdim7</div>
-                        <div class = "chord_box" id = "dim7"> dim7 </div>
+                    <div class="table display_none" id = "chords_table">
+                        <div class = "box" id = "maj"> maj </div>
+                        <div class = "box" id = "maj7"> maj7 </div>
+                        <div class = "box" id = "min"> min </div>
+                        <div class = "box" id = "min7"> min7 </div>
+                        <div class = "box" id = "dom7"> dom7 </div>
+                        <div class = "box" id = "hdim7"> hdim7</div>
                     </div>
                     <div id="keyboard">
                         <div id="wkcontainer"></div>
@@ -55,18 +70,25 @@
                         <div id="bkcontainer3"></div>
                         <div id="bkcontainer4"></div>
                     </div>
-                    <button id="playbutton"><i class="fa fa-play"></i></button>
+                    <button id="playbutton" onclick="play_question()"><i class="fa fa-play"></i></button>
+                    <button id="nextbutton" onclick="next()"><i class="fa fa-step-forward"></i></button>
+                    <label id="questions_label"></label>
+                    <div id="registration_section" class="display_none">
+                        <label for="username">username:</label>
+                        <input type="text" id="username_box"><br>
+                        <button id="register">REGISTER</button><button id="cancel" onclick="restart()">CANCEL</button>
+                    </div>
                     <div id="settingsico">    
                         <i name="settings" class="fa fa-gear"></i><label for="settings">SETTINGS</label>   
                     </div> 
-                    <div id="settings">
+                    <div id="settings" class="enabled_settings">
                         <label for="difficulty">Difficulty</label>
                         <select name="difficulty" id="difficulty">
                             <option value="low">low</option>
                             <option value="medium">medium</option>
                             <option value="hard">hard</option>
                         </select>
-                        <br>
+                        <p> </p>
                         <label for="octave">Octave</label><br>
                         <select name="octave" id="octave">
                             <option value="c0c2">C0-C2</option>
@@ -80,7 +102,7 @@
                         </select>
                         <p> </p>
                         <label for="tonal_reference"> <center>Tonal Reference</center></label>
-                        <select name="tonal_reference">
+                        <select name="tonal_reference" id="tonal_reference">
                             <option value="C">C</option>
                             <option value="C#">C#</option>
                             <option value="D">D</option>
@@ -95,22 +117,25 @@
                             <option value="B">B</option>  
                         </select>
                         <p> </p>
-                        <label for="switch"> <center>Switch to  </center> </label>
-                        <select name="switch">
+                        <label for="level"> <center>Switch to  </center> </label>
+                        <select name="level" id="level">
                             <option value="notes">notes</option>
                             <option value="intervals">intervals</option>
                             <option value="chords">chords</option>
                         </select>
                         <p> </p>
-                        <label for="input"> <center>Input</center></label>
-                        <select name="input">
+                        <label for="input_type"> <center>Input</center></label>
+                        <select name="input_type" id="input_type">
                             <option value="mouse">mouse</option>
-                            <option value="midi-keybord">midi keybord</option>
+                            <option value="midi-keyboard">midi keyboard</option>
                         </select>
+                        <p> </p>
+                        <button id="start" onclick="start()">START</button>
+                        <button id="restart" onclick="restart()">RESTART</button>
                     </div>
                     <div id="wrongans" class="answer"></div>
                     <div id="goodans" class="answer"></div>
-                    <label id="score"></label>
+                    <label id="score_label"></label>
                     <div id="resume">CLICK SOMEWHERE TO START SOUND</div>
                 </app-view>
         </div>
