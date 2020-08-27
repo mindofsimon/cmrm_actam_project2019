@@ -1,0 +1,59 @@
+<html>
+    <title>EAR TRAINING - CHARTS</title>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.4.84/Tone.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-firestore.js"></script>
+        <script src="teoria-master/teoria.js"></script>
+        <script src="tonal-master/tonal.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="charts.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.0/css/all.min.css">
+        <link rel="shortcut icon" href="https://large-drawer.surge.sh/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="https://large-drawer.surge.sh/favicon.ico" type="image/x-icon">
+
+
+
+
+    </head>
+
+    <body>
+        <h2 style="font-family: Lucida Console, Monaco, monospace;">CHARTS</h2>
+            <canvas id="pie" width="850" height="600"></canvas>
+            <i id="search_icon" class="fas fa-search"></i>
+            <label id="search_label">SEARCH</label>
+            <div id="search_param_div">
+                <div id="radio1">
+                    <label for="mine">my charts</label><br>
+                    <input type="radio" id="mine" name="chart_type" value="mine" checked="true">
+                </div>
+                <div id="radio2">
+                    <label for="global">global</label><br>
+                    <input type="radio" id="global" name="chart_type" value="global">
+                </div>
+                <div id="selectbox">
+                    <label for="level"> level </label><input type="checkbox" id="level_check">
+                    <select name="level" id="level" disabled="true">
+                        <option value="notes">notes</option>
+                        <option value="intervals">intervals</option>
+                        <option value="chords">chords</option>
+                    </select><br><br>
+                    <label for="difficulty"> difficulty </label><input type="checkbox" id="diff_check">
+                    <select name="difficulty" id="difficulty" disabled="true"> 
+                        <option value="low">low</option>
+                        <option value="medium">medium</option>
+                        <option value="hard">hard</option>
+                    </select><br><br>
+                    <label for="input"> input </label><input type="checkbox" id="input_check">
+                    <select name="input" id="input" disabled="true">
+                        <option value="mouse">mouse</option>
+                        <option value="midi keyboard">midi keyboard</option>
+                    </select>
+                </div>
+            </div>
+            <img id="logo_icon" src="ear_logo.png" width="40px" height="40px">
+            <label id="username_label"></label>
+        <script src="charts.js"></script>
+    </body>
+</html>    

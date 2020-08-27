@@ -9,11 +9,6 @@ function Item(key,type,pressed){
     this.started=false;//used to start or terminate correctly a note
 }
 
-//total scores
-var total_notes_scores=[];
-var total_intervals_scores=[];
-var total_chords_scores=[];
-
 //game started
 var game_started=false;
 
@@ -84,7 +79,7 @@ var piano = new Tone.Sampler({
     "C8" : "C8.[mp3|ogg]"
 }, {
     "release" : 1,
-    "baseUrl" : "keyboard/audio/salamander/"
+    "baseUrl" : "audio/salamander/"
 }).toMaster();
 
 //various octaves
@@ -122,6 +117,12 @@ var notes=active_octave;
 var intervals=["m2","M2","m3","M3","P4","A4","P5","m6","M6","m7","M7","O"];
 var chords=["maj","maj7","min","min7","dom7","hdim7"];
 var active_level;
+
+//active user
+var name;
+let params = new URLSearchParams(location.search);
+name=params.get('name');
+username_label.innerText="@"+name;
 
 keyboard=document.querySelector("#keyboard")
 bkcontainer1=document.querySelector("#bkcontainer1")
@@ -485,15 +486,6 @@ function getMIDIMessage(midiMessage) {//maybe I'll need one if for every level t
     }
 }
 
-//RESUME on click with FadeOut
-resume_button=document.querySelector("#resume");
-document.onclick=fadeout;
-
-function fadeout() {
-    resume_button.style.opacity = '0';
-}
-resume_button.onclick=fadeout;
-
 //Settings functions
 function disable_settings(){
     settings.classList.remove("enabled_settings")
@@ -746,7 +738,7 @@ function question(){
             correct_answer=chord_notes;
         break;
     }
-    questions_label.innerText="Question n°"+question_number;
+    questions_label.innerText="Question: "+question_number+"/10";
 }
 
 function start(){
@@ -759,6 +751,16 @@ function start(){
     }
     question();//first one, then others will by called by NEXT button
 
+}
+
+//Charts button function
+function charts(){
+    window.open("charts.html?name="+name);
+}
+
+//Info button function
+function info(){
+    window.open("prova.txt")//to substitute with a pdf containing game informations
 }
 
 //Restart button functions
@@ -785,7 +787,6 @@ function restart(){
     answer=["U"]
     score_label.innerText="";
     questions_label.innerText="";
-    username_box.value="";
     already_played=false;
     hide_tables();
     hide_registration();
@@ -797,35 +798,15 @@ function show_registration(){
     registration_section.classList.remove("display_none")
 }
 
-function write_db(username,points){
-    switch(level.value){
-        case "notes":
-            total_notes_scores.push({name:username,score:points})
-            db.collection("users_scores").doc("notes_scores").set({//then I'll have to switch to choose the right document depending on the active level
-            notes_scores_record:total_notes_scores
-            })
-        break;
-        case "intervals":
-            total_intervals_scores.push({name:username,score:points})
-            db.collection("users_scores").doc("intervals_scores").set({//then I'll have to switch to choose the right document depending on the active level
-            intervals_scores_record:total_intervals_scores
-            })
-        break;
-        case "chords":
-            total_chords_scores.push({name:username,score:points})
-            db.collection("users_scores").doc("chords_scores").set({//then I'll have to switch to choose the right document depending on the active level
-            chords_scores_record:total_chords_scores
-            })
-        break;
-    }
-        
+function write_db(username,points,diff,input,lev){
+    db.collection("users_scores").doc("scores").update({
+        scores_record: firebase.firestore.FieldValue.arrayUnion({name:username,score:points,difficulty:diff,input:input,level:lev})
+    })
 }
 
 function register_score(){
     register.onclick=function(){
-        if(username_box.value!=""){
-            write_db(username_box.value,score_label.innerText);
-        }
+        write_db(name,current_score,difficulty.value,input_type.value,level.value);
         restart();
     }
 }
@@ -1020,41 +1001,6 @@ var firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   var db = firebase.firestore()
-
-//Reading db
-db.collection("users_scores").doc("notes_scores").get().then(
-    function (doc) {
-        total_notes_scores=doc.data().notes_scores_record;
-    }
-)
-db.collection("users_scores").doc("notes_scores").onSnapshot(
-    function(doc) {
-        total_notes_scores=doc.data().notes_scores_record;
-    }
-)
-
-db.collection("users_scores").doc("intervals_scores").get().then(
-    function (doc) {
-        total_intervals_scores=doc.data().intervals_scores_record;
-    }
-)
-db.collection("users_scores").doc("intervals_scores").onSnapshot(
-    function(doc) {
-        total_intervals_scores=doc.data().intervals_scores_record;
-    }
-)
-
-db.collection("users_scores").doc("chords_scores").get().then(
-    function (doc) {
-        total_chords_scores=doc.data().chords_scores_record;
-    }
-)
-db.collection("users_scores").doc("chords_scores").onSnapshot(
-    function(doc) {
-        total_chords_scores=doc.data().chords_scores_record;
-    }
-)
-
 
 //**************************NOTES************************* */
 //put everything in MVC mode

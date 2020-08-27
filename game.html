@@ -1,4 +1,5 @@
 <html>
+    <title>EAR TRAINING - GAME</title>
     <head>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.4.84/Tone.js"></script>
@@ -6,8 +7,11 @@
         <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-firestore.js"></script>
         <script src="teoria-master/teoria.js"></script>
         <script src="tonal-master/tonal.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="keymain.css">
+        <link rel="stylesheet" type="text/css" href="game.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.0/css/all.min.css">
+        <link rel="shortcut icon" href="https://large-drawer.surge.sh/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="https://large-drawer.surge.sh/favicon.ico" type="image/x-icon">
     </head>
 
     <body>
@@ -15,53 +19,53 @@
             <navbar id="navbar" :title="mainTitle"></navbar>
                 <app-view id="app-view">
                     <div class="table display_none" id = "notes_table">
-                        <div class = "box" id = "n1"> C </div>
-                        <div class = "box" id = "n2"> C# </div>
-                        <div class = "box" id = "n3"> D </div>
-                        <div class = "box" id = "n4"> D# </div>
-                        <div class = "box" id = "n5"> E </div>
-                        <div class = "box" id = "n6"> F </div>
-                        <div class = "box" id = "n7"> F# </div>
-                        <div class = "box" id = "n8"> G </div>
-                        <div class = "box" id = "n9"> G# </div>
-                        <div class = "box" id = "n10"> A </div>
-                        <div class = "box" id = "n11"> A# </div>
-                        <div class = "box" id = "n12"> B </div>
-                        <div class = "box" id = "n13"> C </div>
-                        <div class = "box" id = "n14"> C# </div>
-                        <div class = "box" id = "n15"> D </div>
-                        <div class = "box" id = "n16"> D# </div>
-                        <div class = "box" id = "n17"> E </div>
-                        <div class = "box" id = "n18"> F </div>
-                        <div class = "box" id = "n19"> F# </div>
-                        <div class = "box" id = "n20"> G </div>
-                        <div class = "box" id = "n21"> G# </div>
-                        <div class = "box" id = "n22"> A </div>
-                        <div class = "box" id = "n23"> A# </div>
-                        <div class = "box" id = "n24"> B </div>
-                        <div class = "box" id = "n25"> C </div>
+                        <div class = "box n_box" id = "n1"> C </div>
+                        <div class = "box n_box" id = "n2"> C# </div>
+                        <div class = "box n_box" id = "n3"> D </div>
+                        <div class = "box n_box" id = "n4"> D# </div>
+                        <div class = "box n_box" id = "n5"> E </div>
+                        <div class = "box n_box" id = "n6"> F </div>
+                        <div class = "box n_box" id = "n7"> F# </div>
+                        <div class = "box n_box" id = "n8"> G </div>
+                        <div class = "box n_box" id = "n9"> G# </div>
+                        <div class = "box n_box" id = "n10"> A </div>
+                        <div class = "box n_box" id = "n11"> A# </div>
+                        <div class = "box n_box" id = "n12"> B </div>
+                        <div class = "box n_box" id = "n13"> C </div>
+                        <div class = "box n_box" id = "n14"> C# </div>
+                        <div class = "box n_box" id = "n15"> D </div>
+                        <div class = "box n_box" id = "n16"> D# </div>
+                        <div class = "box n_box" id = "n17"> E </div>
+                        <div class = "box n_box" id = "n18"> F </div>
+                        <div class = "box n_box" id = "n19"> F# </div>
+                        <div class = "box n_box" id = "n20"> G </div>
+                        <div class = "box n_box" id = "n21"> G# </div>
+                        <div class = "box n_box" id = "n22"> A </div>
+                        <div class = "box n_box" id = "n23"> A# </div>
+                        <div class = "box n_box" id = "n24"> B </div>
+                        <div class = "box n_box" id = "n25"> C </div>
                     </div>
                     <div class="table display_none" id = "intervals_table">
-                        <div class = "box" id = "m2"> m2 </div>
-                        <div class = "box" id = "M2"> M2 </div>
-                        <div class = "box" id = "m3"> m3 </div>
-                        <div class = "box" id = "M3"> M3 </div>
-                        <div class = "box" id = "P4"> P4</div>
-                        <div class = "box" id = "A4"> A4</div>
-                        <div class = "box" id = "P5"> P5</div>
-                        <div class = "box" id = "m6"> m6 </div>
-                        <div class = "box" id = "M6"> M6 </div>
-                        <div class = "box" id = "m7"> m7 </div>
-                        <div class = "box" id = "M7"> M7 </div>
-                        <div class = "box" id = "O"> O </div>
+                        <div class = "box i_box" id = "m2"> m2 </div>
+                        <div class = "box i_box" id = "M2"> M2 </div>
+                        <div class = "box i_box" id = "m3"> m3 </div>
+                        <div class = "box i_box" id = "M3"> M3 </div>
+                        <div class = "box i_box" id = "P4"> P4</div>
+                        <div class = "box i_box" id = "A4"> A4</div>
+                        <div class = "box i_box" id = "P5"> P5</div>
+                        <div class = "box i_box" id = "m6"> m6 </div>
+                        <div class = "box i_box" id = "M6"> M6 </div>
+                        <div class = "box i_box" id = "m7"> m7 </div>
+                        <div class = "box i_box" id = "M7"> M7 </div>
+                        <div class = "box i_box" id = "O"> O </div>
                     </div>
                     <div class="table display_none" id = "chords_table">
-                        <div class = "box" id = "maj"> maj </div>
-                        <div class = "box" id = "maj7"> maj7 </div>
-                        <div class = "box" id = "min"> min </div>
-                        <div class = "box" id = "min7"> min7 </div>
-                        <div class = "box" id = "dom7"> dom7 </div>
-                        <div class = "box" id = "hdim7"> hdim7</div>
+                        <div class = "box c_box" id = "maj"> maj </div>
+                        <div class = "box c_box" id = "maj7"> maj7 </div>
+                        <div class = "box c_box" id = "min"> min </div>
+                        <div class = "box c_box" id = "min7"> min7 </div>
+                        <div class = "box c_box" id = "dom7"> dom7 </div>
+                        <div class = "box c_box" id = "hdim7"> hdim7</div>
                     </div>
                     <div id="keyboard">
                         <div id="wkcontainer"></div>
@@ -70,18 +74,18 @@
                         <div id="bkcontainer3"></div>
                         <div id="bkcontainer4"></div>
                     </div>
-                    <button id="playbutton" onclick="play_question()"><i class="fa fa-play"></i></button>
-                    <button id="nextbutton" onclick="next()"><i class="fa fa-step-forward"></i></button>
+                    <button id="playbutton" title="play" onclick="play_question()"><i style="color: rgb(145, 187, 81);" class="fas fa-volume-up"></i></button>
+                    <button id="nextbutton" title="next" onclick="next()"><i style="color: indianred;" class="fa fa-step-forward"></i></button>
                     <label id="questions_label"></label>
                     <div id="registration_section" class="display_none">
-                        <label for="username">username:</label>
-                        <input type="text" id="username_box"><br>
+                        <label>DO YOU WANT TO REGISTER YOUR SCORE?</label><br>
                         <button id="register">REGISTER</button><button id="cancel" onclick="restart()">CANCEL</button>
                     </div>
                     <div id="settingsico">    
                         <i name="settings" class="fa fa-gear"></i><label for="settings">SETTINGS</label>   
                     </div> 
                     <div id="settings" class="enabled_settings">
+                        <br>
                         <label for="difficulty">Difficulty</label>
                         <select name="difficulty" id="difficulty">
                             <option value="low">low</option>
@@ -117,7 +121,7 @@
                             <option value="B">B</option>  
                         </select>
                         <p> </p>
-                        <label for="level"> <center>Switch to  </center> </label>
+                        <label for="level"> <center>level  </center> </label>
                         <select name="level" id="level">
                             <option value="notes">notes</option>
                             <option value="intervals">intervals</option>
@@ -130,15 +134,18 @@
                             <option value="midi-keyboard">midi keyboard</option>
                         </select>
                         <p> </p>
-                        <button id="start" onclick="start()">START</button>
-                        <button id="restart" onclick="restart()">RESTART</button>
+                        <button id="start" title="start" onclick="start()"><i class="fa fa-play"></i></button>
+                        <button id="restart" title="restart" onclick="restart()"><i class="fas fa-redo"></i></button>
                     </div>
+                    <button id="chartsbutton" title="charts" onclick="charts()"><i style="color: rgb(241, 177, 57);" class="fas fa-chart-pie"></i></button>
+                    <button id="infobutton" title="info" onclick="info()"><i style="color:rgb(78, 202, 202);" class="fas fa-info-circle"></i></button>
                     <div id="wrongans" class="answer"></div>
                     <div id="goodans" class="answer"></div>
                     <label id="score_label"></label>
-                    <div id="resume">CLICK SOMEWHERE TO START SOUND</div>
+                    <img id="logo_icon" src="ear_logo.png" width="40px" height="40px">
+                    <label id="username_label"></label>
                 </app-view>
         </div>
-        <script src="keymain.js"></script>
+        <script src="game.js"></script>
     </body>
 </html>    
