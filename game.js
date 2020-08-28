@@ -926,7 +926,7 @@ function handle_click(box,index,boxes){
         else if(correct_answer[0]!="U" && correct_answer[1]!="U" && correct_answer.length==2){
             answer[0]=intervals[index-25];//play attention! boxes are also notes and chords boxes!
             if(distance==tonal_distance[index-25]){
-                piano.triggerAttackc(correct_answer[0])
+                piano.triggerAttack(correct_answer[0])
                 piano.triggerAttack(correct_answer[1])
                 goodans.classList.add("goodanson")
                 current_score++;
