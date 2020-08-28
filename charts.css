@@ -16,7 +16,7 @@ h2 {
     height: 70px;
     position: relative;
     top: 25px;
-    right: 2%;
+    right: 1%;
     font-family: "Lucida Console", Monaco, monospace;
     font-size: 15px;
     letter-spacing: 0px;
@@ -82,7 +82,7 @@ h2 {
 #radio1{
   position: relative;
   top:10.7%;
-  right: 20%;
+  right: 29%;
   font-family: "Lucida Console", Monaco, monospace;
   font-size: 15px;
   letter-spacing: 0px;
@@ -97,7 +97,7 @@ h2 {
 #radio2{
   position: relative;
   top:1%;
-  left:25%;
+  left:36%;
   font-family: "Lucida Console", Monaco, monospace;
   font-size: 15px;
   letter-spacing: 0px;
