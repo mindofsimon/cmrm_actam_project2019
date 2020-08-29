@@ -1,3 +1,12 @@
+/*
+Check Registration Page
+    -receives data from index page
+    -controls if data is correct
+    -shows appropriate confirmation/error messages
+    -gives opportunity to go back to index page with a link (BACK)
+ */
+
+//checking if the selected username is available
 function freeUsername(name){
     db.collection("users_data").doc("data").get().then(
         function (doc) {
@@ -12,10 +21,12 @@ function freeUsername(name){
       return true;
 }
 
+//checking if user inserted matching passwords
 function matchingPasswords(p1,p2){
     return(p1==p2);
 }
 
+//to write user data inside database
 function writeDb(name,password){
     db.collection("users_data").doc("data").update({
         users_record: firebase.firestore.FieldValue.arrayUnion({name:name,password:password})
@@ -43,6 +54,8 @@ let params = new URLSearchParams(location.search);
 name=params.get('reg_name');
 pass1=params.get('reg_pass1');
 pass2=params.get('reg_pass2');
+
+//checking all requirements and showing relative messages
 if(freeUsername(name) && matchingPasswords(pass1, pass2)){
     check_reg_img2.classList.remove("display_none");
     check_reg_img.classList.add("display_none");

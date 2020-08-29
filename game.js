@@ -1,7 +1,12 @@
-//MODEL
-//Object
+/* 
+Game Page
+    -keyboard created in js part (not present in HTML page)
+    -sampler from Tone.js to generate sounds
+*/
+
+//Object (all keyboard keys)
 var items=[];
-//Object constructor
+//Object constructor (every single keyboard key element structure)
 function Item(key,type,pressed){
     this.key=key;//key div (HTML Element)
     this.type=type;//"W"=White,"B"=Black
@@ -9,7 +14,7 @@ function Item(key,type,pressed){
     this.started=false;//used to start or terminate correctly a note
 }
 
-//game started
+//game started variable
 var game_started=false;
 
 //answer variables
@@ -21,31 +26,31 @@ var game_started=false;
 var answer=["U"];
 var correct_answer=["U"];
 
-//intervals and distances
+//intervals and distances variables
 var tonal_distance=[1,2,3,4,5,6,7,8,9,10,11,12];
 var distance;//correct distance
-var count_released=0;//just for the midi part
+var count_released=0;//just for the midi part (to handle keys releasement)
 
-//chords
+//chords variables
 var extracted_chord;
 var extracted_chord_index;
 var chord_type;
 var chord_reference=3;//to update from C to C3 for example
 
-//timeout
+//timeout variable
 var to;
 
-//score
+//score variable
 var current_score=0;
 
 //number of questions
 var question_number=0;
-var max_questions=10;
+var max_questions=10;//keep it fixed, otherwise need to changhe also charts data structure.
 
-//difficulty
+//depends on difficulty level, keeps trace whether the question has already been played
 var already_played=false;
 
-//piano
+//piano construction (sampler)
 var piano = new Tone.Sampler({
     "A0" : "A0.[mp3|ogg]",
     "C1" : "C1.[mp3|ogg]",
@@ -118,7 +123,7 @@ var intervals=["m2","M2","m3","M3","P4","A4","P5","m6","M6","m7","M7","O"];
 var chords=["maj","maj7","min","min7","dom7","hdim7"];
 var active_level;
 
-//active user
+//active user (recovering data from URL)
 var name;
 let params = new URLSearchParams(location.search);
 name=params.get('name');
@@ -131,7 +136,7 @@ bkcontainer3=document.querySelector("#bkcontainer3")
 bkcontainer4=document.querySelector("#bkcontainer4")
 wkcontainer=document.querySelector("#wkcontainer")
 
-//Creating the keys
+//Creating the keyboard keys
 function loadWhiteKeys(){
     for(var i=0;i<5;i=i+2){
         items[i]=new Item(document.createElement("div"),"W",false);
@@ -189,7 +194,7 @@ function loadKeyboard(){
 }
 loadKeyboard();
 
-//VIEW
+//render functions
 function render_keys(){
     for(i=0;i<items.length;i++){
         if(!items[i].started){
@@ -216,7 +221,7 @@ function render_keys(){
 }
 setInterval(render_keys,50);
 
-//CONTROLLER
+//play/stop note functions
 function play_note(position){
         //TRIGGER ATTACK
         if(!items[position].started){
@@ -231,6 +236,7 @@ function stop_note(position){
         items[position].started=false;
 }
 
+//to show key pressure/releasement
 function selected_key(item,index){
     items[index].pressed=true;
 }
@@ -239,7 +245,7 @@ function unselected_key(item,index){
     items[index].pressed=false;
 }
 
-//MIDI
+//midi part
 navigator.requestMIDIAccess()
     .then(onMIDISuccess, onMIDIFailure);
 
@@ -259,6 +265,8 @@ function onMIDISuccess(midiAccess) {
         input.onmidimessage = getMIDIMessage;
 }
 
+
+//to check whether two arrays are equal or not
 function areEqual(arr1,arr2){
     //I don't need to check the length of the arrays
     for(i=0;i<arr1.length;i++){
@@ -269,6 +277,7 @@ function areEqual(arr1,arr2){
     return true;
 }
 
+//returns note index given correct (note) answer
 function find_correct_note_index(correct){
     for(i=0;i<active_octave.length;i++){
         if(active_octave[i]==correct){
@@ -278,6 +287,7 @@ function find_correct_note_index(correct){
     return 0;//anyway if everything is ok we should never get here
 }
 
+//chords answer update function
 function update_chord_answer(){
     if(answer[1]=="U"){
         count_released=3;//forcing the release of the missing notes(3)
@@ -290,12 +300,14 @@ function update_chord_answer(){
     }
 }  
 
+//just to have a feedback
 function prova(){
     for(i=0;i<items.length;i++){
         console.log(items[i].key.classList);
     }
 }
 
+//checking chords answer given by user
 function check_chord_answer(){
     if(answer[1]!="U" && answer[2]!="U"){
         if((correct_answer.length==3 && answer[3]=="U")||(correct_answer.length==4 && answer[3]!="U")){
@@ -358,12 +370,14 @@ function check_chord_answer(){
     count_released=0;
 }
 
+//interval answer update function
 function update_interval_answer(){
     if(answer[1]=="U"){
         count_released=1;//forcing the release of the missing note
     }
 }
 
+//checking interval answer given by user
 function check_interval_answer(){
     if(answer[1]!="U" && Math.abs(find_correct_ans_index(answer[0])-find_correct_ans_index(answer[1]))==distance){
         goodans.classList.add("goodanson")
@@ -394,6 +408,7 @@ function check_interval_answer(){
     count_released=0;
 }
 
+//checking note answer given by user
 function check_note_answer(){
     if(answer[0]==correct_answer[0]){
         goodans.classList.add("goodanson")
@@ -414,6 +429,7 @@ function check_note_answer(){
     }
 }
 
+//MIDI input section
 function getMIDIMessage(midiMessage) {//maybe I'll need one if for every level to handle different games
     if(input_type.value=="midi-keyboard"){
         index=midiMessage.data[1]-48;
@@ -486,7 +502,7 @@ function getMIDIMessage(midiMessage) {//maybe I'll need one if for every level t
     }
 }
 
-//Settings functions
+//settings functions
 function disable_settings(){
     settings.classList.remove("enabled_settings")
     settings.classList.add("locked_settings")
@@ -523,7 +539,7 @@ function enable_settings(){
     }
 }
 
-//Start button and question functions
+//setting active notes/intervals/chords depending on selected settings 
 function set_level(){
     switch(octave.value){
         case "c0c2":
@@ -621,6 +637,7 @@ function set_level(){
     }
 }
 
+//to select which table to show (for mouse input only)
 function show_table(){
     switch(level.value){
         case "notes":
@@ -635,6 +652,7 @@ function show_table(){
     }
 }
 
+//setting chord type
 function set_chord_type(index){
     switch(index){
         case 0:
@@ -664,6 +682,7 @@ function set_chord_type(index){
     }
 }
 
+//simplifies note expression through Tonal.Note
 function note_conversion(chord_notes){//to simplify the notes
     for(i=0;i<chord_notes.length;i++){
         chord_notes[i]=Tonal.Note.simplify(chord_notes[i])
@@ -671,6 +690,7 @@ function note_conversion(chord_notes){//to simplify the notes
     return chord_notes;
 }
 
+//finds note index given note name
 function find_note_index(note){
     generic_octave=["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
     for(i=0;i<generic_octave.length;i++){
@@ -680,6 +700,7 @@ function find_note_index(note){
     }
 }
 
+//to handle chords correctly
 function note_correction(chord_notes){
     //First note become for example B--->B3
     //then I check if next one goes one octave above
@@ -714,6 +735,7 @@ function note_correction(chord_notes){
     return corr_notes;
 }
 
+//everytime a new question is called
 function question(){
     question_number++;
     //setting correct answer
@@ -741,6 +763,7 @@ function question(){
     questions_label.innerText="Question: "+question_number+"/10";
 }
 
+//start button function
 function start(){
     game_started=true;
     score_label.innerText="SCORE:0/0";
@@ -753,17 +776,17 @@ function start(){
 
 }
 
-//Charts button function
+//charts button function
 function charts(){
     window.open("charts.html?name="+name);
 }
 
-//Info button function
+//info button function
 function info(){
     window.open("prova.txt")//to substitute with a pdf containing game informations
 }
 
-//Restart button functions
+//restart button functions
 function hide_tables(){
     notes_table.classList.add("display_none")
     intervals_table.classList.add("display_none")
@@ -798,12 +821,14 @@ function show_registration(){
     registration_section.classList.remove("display_none")
 }
 
+//to write data on database
 function write_db(username,points,diff,input,lev){
     db.collection("users_scores").doc("scores").update({
         scores_record: firebase.firestore.FieldValue.arrayUnion({name:username,score:points,difficulty:diff,input:input,level:lev})
     })
 }
 
+//to register user score
 function register_score(){
     register.onclick=function(){
         write_db(name,current_score,difficulty.value,input_type.value,level.value);
@@ -837,7 +862,7 @@ function next(){
 }
 
 //Play button function
-function play_question(){//just a for could be enough
+function play_question(){
     if(game_started){
         if(difficulty.value=="low"||(difficulty.value=="medium" && !already_played)||(difficulty.value=="hard" && !already_played))
             if(correct_answer!=["U"] && correct_answer.length==1){
@@ -856,7 +881,7 @@ function play_question(){//just a for could be enough
     }
 }
 
-//Box highlighting functions
+//boxes highlighting functions
 function selection(box){
     box.onmouseover=function(){
         box.classList.add("h_box")
@@ -869,7 +894,7 @@ function deselection(box){
     }
 }
 
-//Boxes click functions
+//boxes click functions
 function find_correct_ans_index(correct){
     for(i=0;i<active_level.length;i++){//maybe move to active_level to handle all levels
         if(active_octave[i]==correct){
@@ -879,6 +904,7 @@ function find_correct_ans_index(correct){
     return 0;//anyway if everything is ok we should never get here
 }
 
+//to find chord type
 function find_chord_type_index(c){
     switch (c){
         case "maj":
@@ -903,6 +929,7 @@ function find_chord_type_index(c){
     return ind;
 }
 
+//to handle mouse input
 function handle_click(box,index,boxes){
     box.onclick=function(){
         if(correct_answer[0]!="U" && correct_answer.length==1){
@@ -1001,11 +1028,3 @@ var firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   var db = firebase.firestore()
-
-//**************************NOTES************************* */
-//put everything in MVC mode
-
-//MIDI [1,2,3]-->1:press,2:key
-//144-->key pressed
-//128-->key released
-//keys from 48 to 72 (default octave)

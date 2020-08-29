@@ -1,3 +1,12 @@
+/*
+Charts Page
+  -Builds a pie chart depending on search parameters
+  -Search parameters: my charts/global, level(notes/intervals/chords), difficulty(low/mid/hard), input(mouse/midi)
+  -Render functions check for changes in search settings and rebuild the pie chart every 300ms
+  -Pie chart is built with canvas, context is cleaned if there is no data onto which build the graph
+  -Pie chart evaluates a data structure which contains all the user scores values of interest
+*/
+
 var total_scores=[];
 var already_read_record=false;
 
@@ -26,6 +35,7 @@ var canvas=document.getElementById('pie');
 var ctx = canvas.getContext('2d');
 var alreadyRead=false;
 
+//pie chart creation function, it divides the 360° angle depending on user scores percentages
 function buildPie(record){
   var drawPieChart = function(data, colors) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);//clearing the context to redraw another pie
@@ -87,7 +97,8 @@ function buildPie(record){
     return angle * Math.PI / 180
   }
       
-  function howMany(ar,n,d,inp,lev){//HANDLE CHECKBOXES
+  //it returns how many users match the selected search requirements
+  function howMany(ar,n,d,inp,lev){
     cont=0;
     for(i=0;i<ar.length;i++){
       if(!mine.checked && level_check.checked && diff_check.checked && input_check.checked){
@@ -174,6 +185,7 @@ function buildPie(record){
     return cont;
   }
       
+  //data structure needed to build the pie chart
   var data = [
     { label: '0/10', value: howMany(record,0,difficulty.value,input.value,level.value) },
     { label: '1/10', value: howMany(record,1,difficulty.value,input.value,level.value) },
@@ -188,6 +200,7 @@ function buildPie(record){
     { label: '10/10', value: howMany(record,10,difficulty.value,input.value,level.value) }
   ];
       
+  //color of the various pie chart sections
   var colors = [ '#DE0D5F', '#FF00B6', '#E800FF', '#9300FF ' ,'#001FFF ', '#0093FF','#1AD3CB ','#4BCF24','#D2CA17 ','#FF6100','#FF0C00'];
       
   //to check if selected searche produced some data
@@ -207,6 +220,7 @@ function buildPie(record){
   }
 }
 
+//render function on check/select boxes
 function searchBoxesRender(){
   if(!level_check.checked){
     level.disabled=true;

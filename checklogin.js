@@ -1,3 +1,11 @@
+/*
+Check Login Page
+    -receives data from index page
+    -controls if data is correct
+    -redirects user to game page (login ok) or shows error message (login not ok)
+ */
+
+//checks if there is a registered user with those username and password
 function foundUser(name,password){
     var found=false;
         for(i=0;i<users.length;i++){
@@ -29,6 +37,7 @@ let params = new URLSearchParams(location.search);
 name=params.get('log_name');
 pass=params.get('log_pass');
 
+//reading db, checking login requirements and showing relative messages/icons
 db.collection("users_data").doc("data").get().then(
     function (doc) {
       users=doc.data().users_record;//reading db
