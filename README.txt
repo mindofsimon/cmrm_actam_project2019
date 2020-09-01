@@ -1,4 +1,5 @@
 EAR GYM - Progect for CMRM/ACTAM A.Y.2019/2020
+by Corrado Cantoni, Daniele Ugo Leonzio, Simone Mariani from Music Engineering (POLIMI)
 
 ONLINE on https://large-drawer.surge.sh/
 
