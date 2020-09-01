@@ -783,7 +783,7 @@ function charts(){
 
 //info button function
 function info(){
-    window.open("prova.txt")//to substitute with a pdf containing game informations
+    window.open("https://pdfhost.io/v/OLbRT.n4L_provapdf.pdf")//to substitute with a pdf containing game informations
 }
 
 //restart button functions
