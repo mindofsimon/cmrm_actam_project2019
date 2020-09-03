@@ -13,3 +13,15 @@ IMPORTANT:
 -remember to enable your MIDI keyboard from your local MIDI editor
 -register and login to play
 -in the game page click on the info button to read all the informations about the game (or open EAR_GYM.pdf from this repo)
+
+HOW TO PLAY:
+-register and login
+-select the desired settings from the settings panel on the right
+-you can either choose MIDI or mouse input
+-press the 'play' button to start the game
+-press the 'reset' button to escape from current game and restart a new settings selection
+-press the green button on the left to play current question
+-press the red button on the left to go to next question
+-at the end of 10th question you have the possibility to register the score
+-info (light blue) button gives you informations about the game
+-charts (orange) button shows you some statistics about the scores
