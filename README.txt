@@ -12,4 +12,4 @@ IMPORTANT:
 -ip address must start with https and not http in order to allow MIDI connection
 -remember to enable your MIDI keyboard from your local MIDI editor
 -register and login to play
--in the game page click on the info button to read all the informations about the game
+-in the game page click on the info button to read all the informations about the game (or open EAR_GYM.pdf from this repo)
