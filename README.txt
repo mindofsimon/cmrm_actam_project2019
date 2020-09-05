@@ -3,9 +3,13 @@ by Corrado Cantoni, Daniele Ugo Leonzio, Simone Mariani from Music Engineering (
 
 ONLINE on https://large-drawer.surge.sh/
 
-AUDIO FILES from Tone.js
+VIDEO TUTORIAL on https://youtu.be/hL8LtN41ZW0
 
-CHORDS LIBRARIES from teoria.js and tonal.js
+AUDIO FILES from Tone.js (https://tonejs.github.io/)
+
+CHORDS LIBRARIES from teoria.js (https://github.com/saebekassebil/teoria) and tonal.js (https://github.com/tonaljs/tonal) 
+
+ALL YOU NEED TO KNOW ABOUT THE GAME in our report EAR_GYM.pdf inside this repository
 
 IMPORTANT:
 -google chrome is strongly recommended
