@@ -783,7 +783,7 @@ function charts(){
 
 //info button function
 function info(){
-    window.open("https://pdfhost.io/v/m64ErZpCp_EAR_GYMpdf.pdf")//to substitute with a pdf containing game informations
+    window.open("https://pdfhost.io/v/Zr6B7.HgU_EAR_GYMpdf.pdf")//to substitute with a pdf containing game informations
 }
 
 //restart button functions
